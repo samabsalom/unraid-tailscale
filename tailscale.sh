@@ -1,4 +1,6 @@
 #!/bin/bash
+killall tailscaled
+/usr/sbin/tailscaled --cleanup
 
 VERSION=$(curl --silent "https://api.github.com/repos/tailscale/tailscale/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/^.//') 
 DIR=/boot/config/tailscale
@@ -38,13 +40,13 @@ fi
 echo "if there is no tailscale config in the go file then create it"
 if grep -Fxq "$PLACEHOLDER" $GODIR
 then
-    echo "doing nothing to go file"
+    echo "updating version number only as config exists"
+    sed -i "/installpkg/ c\installpkg ${DIR}/tailscale-${VERSION}_amd64.txz" $GODIR
 else
     echo "adding to go file"
     echo "#TAILSCALE" >> $GODIR
     echo "installpkg ${DIR}/tailscale-${VERSION}_amd64.txz" >> $GODIR
-    echo "ln -s $DIR/tailscaled.state /var/lib/tailscale/tailscaled.state" >> $GODIR
-    echo "/usr/sbin/tailscaled &" >> $GODIR    
+    echo "/usr/sbin/tailscaled --state=$DIR/tailscaled.state --statedir=$DIR &" >> $GODIR    
 fi
 
 echo "as above but for stop"
@@ -64,3 +66,10 @@ else
     echo "killall tailscaled" >> $STOPDIR
     echo "/usr/sbin/tailscaled --cleanup" >> $STOPDIR    
 fi
+
+
+echo "run the daemon"
+
+installpkg $DIR/tailscale-${VERSION}_amd64.txz
+/usr/sbin/tailscaled --state=$DIR/tailscaled.state --statedir=$DIR &
+
