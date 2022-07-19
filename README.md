@@ -5,13 +5,7 @@ This is based on https://github.com/dmacias72/unRAID-NerdPack
 
 this should pull and run the script
 ```
-curl -LO https://raw.githubusercontent.com/samabsalom/unraid-tailscale/main/tailscale.sh | bash
-```
-
-but i recommend 
-```
-git clone https://github.com/samabsalom/unraid-tailscale.git
-cd unraid-tailscale
+curl -LO https://raw.githubusercontent.com/samabsalom/unraid-tailscale/main/tailscale.sh
 ./tailscale.sh
 ```
 
@@ -19,6 +13,8 @@ you might need to
 ```
 chmod +x tailscale.sh
 ```
+
+The benefits of this method instead of using the docker way is that you can use the new tailscale ssh
 
 This script 
 - kills any running tailscaled instances
