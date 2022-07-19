@@ -14,7 +14,7 @@ you might need to
 chmod +x tailscale.sh
 ```
 
-The benefits of this method instead of using the docker way is that you can use the new tailscale ssh
+The benefits of this method instead of using the docker way is that you can use the new tailscale ssh and it starts up before the array is started 
 
 This script 
 - kills any running tailscaled instances
