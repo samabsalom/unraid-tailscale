@@ -3,10 +3,23 @@
 This is based on https://github.com/dmacias72/unRAID-NerdPack
 
 
-this pulls and runs the script
+this should pull and run the script
 ```
 curl -LO https://raw.githubusercontent.com/samabsalom/unraid-tailscale/main/tailscale.sh | bash
 ```
+
+but i recommend 
+```
+git clone https://github.com/samabsalom/unraid-tailscale.git
+cd unraid-tailscale
+./tailscale.sh
+```
+
+you might need to
+```
+chmod +x tailscale.sh
+```
+
 This script 
 - kills any running tailscaled instances
 - downloads unraid nerdpack and then downloads the latest tailscale file for unraid into this directory 
