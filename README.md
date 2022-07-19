@@ -4,8 +4,9 @@ This is based on https://github.com/dmacias72/unRAID-NerdPack
 
 
 this pulls and runs the script
+```
 curl -LO https://raw.githubusercontent.com/samabsalom/unraid-tailscale/main/tailscale.sh | bash
-
+```
 This script 
 - kills any running tailscaled instances
 - downloads unraid nerdpack and then downloads the latest tailscale file for unraid into this directory 
